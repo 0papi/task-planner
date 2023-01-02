@@ -39,6 +39,8 @@ export default function TaskDisplay({
 
   const [value, setValue] = useState(task?.isCompleted ? 100 : 0);
 
+  // this useEffect will set the value for the task completion progress so that whenever the task is marked as complete, the value will be set to 100
+  // This ensure's that the progress bar updates whenever the user update's the isCompleted value
   useEffect(() => {
     if (task?.isCompleted) {
       setValue(100);
@@ -83,6 +85,7 @@ export default function TaskDisplay({
               <Edit />
             </button>
             <TaskActivities
+              isCompleted={isCompleted}
               id={taskActivitiesID}
               onClick={() => setTaskActivitiesID(id)}
             />

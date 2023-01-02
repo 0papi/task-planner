@@ -7,9 +7,14 @@ import AddDescriptionModal from "../Modals/AddDescriptionModal";
 interface ITaskActs {
   id: string;
   onClick: () => void;
+  isCompleted: boolean;
 }
 
-export default function TaskActivities({ id, onClick }: ITaskActs) {
+export default function TaskActivities({
+  id,
+  onClick,
+  isCompleted,
+}: ITaskActs) {
   const dispatch = useDispatch();
   const { bindings, setVisible } = useModal();
   const { setToast } = useToasts();
@@ -76,6 +81,7 @@ export default function TaskActivities({ id, onClick }: ITaskActs) {
               type: "success",
             });
           }}
+          disabled={isCompleted}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +98,7 @@ export default function TaskActivities({ id, onClick }: ITaskActs) {
             />
           </svg>
 
-          <span>Mark as Complete</span>
+          <span>{isCompleted ? "Task Completed" : "Mark as Complete"}</span>
         </button>
       </div>
     );
