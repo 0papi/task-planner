@@ -29,9 +29,6 @@ export default function Home() {
             >
               Add New Task
             </button>
-            {/* <button className="bg-transparent border border-gray-300 rounded-[20%] p-2">
-              <SettingsIcon />
-            </button> */}
           </div>
         </div>
 

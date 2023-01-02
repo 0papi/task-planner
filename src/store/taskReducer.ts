@@ -64,6 +64,14 @@ const taskSlice = createSlice({
         existingTask.priority = action.payload.priority;
       }
     },
+    setTaskComplete: (state, action) => {
+      const existingTask = state.taskList.find(
+        (task) => task.id === action.payload.id
+      );
+      if (existingTask) {
+        existingTask.isCompleted = true;
+      }
+    },
   },
 });
 
@@ -74,6 +82,7 @@ export const {
   updateTask,
   deleteTask,
   setTaskPriority,
+  setTaskComplete,
 } = taskSlice.actions;
 
 export const selectTaskList = (state: RootState) => state.tasks.taskList;
