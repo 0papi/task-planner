@@ -12,38 +12,42 @@ import InfoIcon from "../components/icons & svs/InfoIcon";
 import { createTasks } from "../store/taskReducer";
 import { options } from "../utils/date";
 
+import DashboardLayout from "../components/Layouts/DashboardLayout";
+
 export default function Home() {
   const { setVisible, bindings } = useModal();
 
   return (
-    <div className="max-w-5xl mx-auto py-10 px-10 bg-backgroundMain">
-      <div className="flex items-center justify-between">
-        <h2 className="font-bold">TList</h2>
-        <div className="flex items-center gap-x-2">
-          <button
-            className="bg-primary text-white py-2 px-6 rounded-xl"
-            onClick={() => setVisible(true)}
-          >
-            Add New Task
-          </button>
-          <button className="bg-transparent border border-gray-300 rounded-[20%] p-2">
-            <SettingsIcon />
-          </button>
+    <DashboardLayout>
+      <div className="py-10 px-10 bg-backgroundMain">
+        <div className="flex items-center justify-between">
+          <h2 className="font-bold">TList</h2>
+          <div className="flex items-center gap-x-2">
+            <button
+              className="bg-primary text-white py-2 px-6 rounded-xl"
+              onClick={() => setVisible(true)}
+            >
+              Add New Task
+            </button>
+            <button className="bg-transparent border border-gray-300 rounded-[20%] p-2">
+              <SettingsIcon />
+            </button>
+          </div>
         </div>
+
+        {/* main tasks body */}
+        <section className="flex gap-x-14 mt-8">
+          <main className="w-3/4">
+            <LeftContainer />
+          </main>
+          <main className="w-1/4">
+            <RightContainer />
+          </main>
+        </section>
+
+        <CreateNewModal bindings={bindings} setVisible={setVisible} />
       </div>
-
-      {/* main tasks body */}
-      <section className="flex gap-x-8 mt-8">
-        <main className="w-3/4">
-          <LeftContainer />
-        </main>
-        <main className="w-1/4">
-          <RightContainer />
-        </main>
-      </section>
-
-      <CreateNewModal bindings={bindings} setVisible={setVisible} />
-    </div>
+    </DashboardLayout>
   );
 }
 

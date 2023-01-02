@@ -45,13 +45,6 @@ export default function TaskDisplay({
         <div className="flex items-center justify-between w-[100%]">
           <h3 className="mb-0">{title}</h3>
           <div className="flex items-center gap-x-4">
-            {/* <button className="flex items-center gap-x-2 px-2 py-1 bg-transparent border border-gray-300 rounded-lg">
-              <PriorityFlag />
-              <span className="text-sm h-6 flex items-center justify-center">
-                Priority
-              </span>
-            </button> */}
-
             <PriorityHandler
               id={priorityID}
               onClick={() => {

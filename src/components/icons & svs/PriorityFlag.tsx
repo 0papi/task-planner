@@ -3,7 +3,11 @@
 // this component should receive the priority.
 // priority could be high / medium or low
 
-export default function PriorityFlag({ priority }: { priority: string }) {
+export default function PriorityFlag({
+  priority,
+}: {
+  priority: string | undefined;
+}) {
   const showFillColors =
     priority === "high"
       ? "#ec364b"

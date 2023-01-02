@@ -1,7 +1,7 @@
 import { Popover } from "@geist-ui/core";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { setTaskPriority } from "../../store/taskReducer";
+import { setTaskPriority, selectTaskList } from "../../store/taskReducer";
 import PriorityFlag from "../icons & svs/PriorityFlag";
 
 interface IPriority {
@@ -16,6 +16,7 @@ export default function PriorityHandler({
   taskPriority,
 }: IPriority) {
   const dispatch = useDispatch();
+  const task = useSelector(selectTaskList).find((task) => task.id === id);
 
   /**
    * this function returns jsx options for setting priority
@@ -62,7 +63,7 @@ export default function PriorityHandler({
           className="flex items-center gap-x-2 px-2 py-1 bg-transparent border border-gray-300 rounded-lg"
           onClick={onClick}
         >
-          <PriorityFlag priority={taskPriority} />
+          <PriorityFlag priority={task?.priority} />
           <span className="text-sm h-6 flex items-center justify-center">
             {showPriorities}
           </span>

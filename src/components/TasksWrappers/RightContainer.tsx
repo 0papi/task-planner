@@ -1,7 +1,11 @@
 export default function RightContainer() {
   return (
-    <div className="bg-rose-900">
-      <h2>Hello Right</h2>
+    <div>
+      <h2>Milestones</h2>
+
+      <div className="bg-white shadow-sm">
+        <h2>Some Card Here</h2>
+      </div>
     </div>
   );
 }
