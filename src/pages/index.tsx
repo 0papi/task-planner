@@ -21,7 +21,7 @@ export default function Home() {
     <DashboardLayout>
       <div className="py-10 px-10 bg-backgroundMain">
         <div className="flex items-center justify-between">
-          <h2 className="font-bold">TList</h2>
+          <h2 className="font-bold">My Work</h2>
           <div className="flex items-center gap-x-2">
             <button
               className="bg-primary text-white py-2 px-6 rounded-xl"
@@ -29,18 +29,18 @@ export default function Home() {
             >
               Add New Task
             </button>
-            <button className="bg-transparent border border-gray-300 rounded-[20%] p-2">
+            {/* <button className="bg-transparent border border-gray-300 rounded-[20%] p-2">
               <SettingsIcon />
-            </button>
+            </button> */}
           </div>
         </div>
 
         {/* main tasks body */}
         <section className="flex gap-x-14 mt-8">
-          <main className="w-3/4">
+          <main className="w-3/5">
             <LeftContainer />
           </main>
-          <main className="w-1/4">
+          <main className="w-2/5">
             <RightContainer />
           </main>
         </section>

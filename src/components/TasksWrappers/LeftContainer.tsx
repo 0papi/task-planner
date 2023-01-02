@@ -9,8 +9,6 @@ export default function LeftContainer() {
 
   return (
     <div className="bg-backgroundMain">
-      <h2>Personal Tasks</h2>
-
       {isEmpty && (
         <div className="flex items-center flex-col justify-center mx-auto">
           <EmtptyState />

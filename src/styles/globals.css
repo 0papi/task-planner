@@ -18,3 +18,27 @@ p,
 a {
   @apply font-inter;
 }
+
+/* Custom Scrollbars */
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 3px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  width: 6px;
+  background: #3026b9;
+  border-radius: 10px;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+}
