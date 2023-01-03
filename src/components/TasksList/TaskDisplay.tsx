@@ -29,8 +29,6 @@ export default function TaskDisplay({
 }: ITasks) {
   const task = useSelector(selectTaskList).find((task) => task.id === id);
 
-  console.log(task);
-
   const { bindings, setVisible } = useModal();
   const [taskId, setTaskId] = useState("");
   const [taskTitle, setTaskTitle] = useState("");
@@ -57,7 +55,7 @@ export default function TaskDisplay({
   const colors = { 0: theme.palette.warning, 100: "#4daa5d" };
 
   return (
-    <div className="bg-white shadow-sm p-4 flex items-baseline gap-x-4 my-4 rounded-[8px] w-full">
+    <div className="bg-white shadow-sm p-4 flex items-baseline gap-x-4 my-4 rounded-[8px]">
       <div className="h-[30px] w-[30px] rounded-[50%] bg-primary border border-gray-600"></div>
       {/* <div>Actions</div> */}
       <div className="flex items-start flex-col w-[100%]">

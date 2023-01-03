@@ -40,6 +40,7 @@ const taskSlice = createSlice({
       if (existingTask) {
         existingTask.content = action.payload.content;
         existingTask.title = action.payload.title;
+        existingTask.isEdited = true;
       }
     },
     deleteTask: (state, action: PayloadAction<IDeleteTask>) => {

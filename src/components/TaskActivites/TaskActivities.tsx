@@ -1,5 +1,6 @@
 import { Popover, useModal, useToasts } from "@geist-ui/core";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import Elipsis from "../icons & svs/ElipsisIcon";
 import { deleteTask, setTaskComplete } from "../../store/taskReducer";
 import AddDescriptionModal from "../Modals/AddDescriptionModal";
@@ -16,6 +17,7 @@ export default function TaskActivities({
   isCompleted,
 }: ITaskActs) {
   const dispatch = useDispatch();
+  const router = useRouter();
   const { bindings, setVisible } = useModal();
   const { setToast } = useToasts();
 

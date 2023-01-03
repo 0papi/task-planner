@@ -14,10 +14,10 @@
 - Create task = done
 - Update task = done
 - Read Task = done
-- Delete todos
+- Delete todos = done
 - Add descriptions to do
 - Search & Filter todos
-- Mark as complete
+- Mark as complete = done
 - Edited flag
 - Set priority
 
