@@ -19,15 +19,15 @@ export default function LeftContainer() {
         {taskList.map((item) => (
           <div key={item?.id}>
             <TaskDisplay
-              title={item.title}
-              content={item.content}
-              createdAt={item.createdAt}
-              id={item.id}
-              isCompleted={item.isCompleted}
-              isEdited={item.isEdited}
-              lastEdited={item.lastEdited}
-              priority={item.priority}
-              description={item.description}
+              title={item?.title}
+              content={item?.content}
+              createdAt={item?.createdAt}
+              id={item?.id}
+              isCompleted={item?.isCompleted}
+              isEdited={item?.isEdited}
+              lastEdited={item?.lastEdited}
+              priority={item?.priority}
+              description={item?.description}
             />
           </div>
         ))}
