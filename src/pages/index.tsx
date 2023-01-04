@@ -5,7 +5,6 @@ import { useState } from "react";
 import { ModalHooksBindings } from "@geist-ui/core/esm/use-modal";
 import { Dispatch, SetStateAction } from "react";
 
-import SettingsIcon from "../components/icons & svs/SettingsIcon";
 import LeftContainer from "../components/TasksWrappers/LeftContainer";
 import RightContainer from "../components/TasksWrappers/RightContainer";
 import InfoIcon from "../components/icons & svs/InfoIcon";

@@ -11,15 +11,17 @@
 
 # Features
 
-- Create task = done
-- Update task = done
-- Read Task = done
-- Delete todos = done
-- Add descriptions to do
+- Create task - done
+- Update task - done
+- Read Task - done
+- Delete todos - done
+- Add descriptions to do - done
 - Search & Filter todos
-- Mark as complete = done
+- Mark as complete - done
 - Edited flag
-- Set priority
+- Set priority - done
+- implement notification - done
+- implement analytics / insights page where users can view the following info: - total tasks - total completed tasks - total uncompleted tasks
 
 # Advanced Features
 
