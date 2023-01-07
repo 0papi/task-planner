@@ -68,10 +68,6 @@ export const CreateNewModal = ({ bindings, setVisible }: IModal) => {
    * @description function that handles dispatching action to create new task
    */
 
-  // `${new Date().getFullYear()}-${
-  //   new Date().getMonth() + 1
-  // }-${new Date().getDate()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`;
-
   const onCreateNewTask = () => {
     // clear error states before running checks
     // this removes any persistent error UI

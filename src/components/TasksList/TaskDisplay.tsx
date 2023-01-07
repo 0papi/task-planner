@@ -7,7 +7,8 @@
  * - three dots - showing additional options
  * - the date and time - showing when it was created
  */
-import { useModal, Progress, useTheme } from "@geist-ui/core";
+
+import { useModal, Progress, useTheme, Popover } from "@geist-ui/core";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
@@ -26,6 +27,7 @@ export default function TaskDisplay({
   id,
   priority,
   isCompleted,
+  description,
 }: ITasks) {
   const task = useSelector(selectTaskList).find((task) => task.id === id);
 
@@ -54,6 +56,12 @@ export default function TaskDisplay({
 
   const colors = { 0: theme.palette.warning, 100: "#4daa5d" };
 
+  // bool check if description exists
+  const isDescriptionAvailable = Boolean(description);
+
+  // description to be passed to popover
+  const showDescription = <p className="max-w-lg py-4 px-2">{description}</p>;
+
   return (
     <div className="bg-white shadow-sm p-4 flex items-baseline gap-x-4 my-4 rounded-[8px]">
       <div className="h-[30px] w-[30px] rounded-[50%] bg-primary border border-gray-600"></div>
@@ -72,6 +80,7 @@ export default function TaskDisplay({
             />
 
             <button
+              title="Edit task"
               className="bg-transparent border border-gray-300 rounded-lg p-1"
               onClick={() => {
                 setTaskId(id);
@@ -89,7 +98,20 @@ export default function TaskDisplay({
             />
           </div>
         </div>
-        <p>{content}</p>
+        <div>
+          <p className="max-w-xl mb-2">{content}</p>
+          {isDescriptionAvailable && (
+            <Popover
+              content={showDescription}
+              placement="bottomStart"
+              offset={5}
+            >
+              <button className="underline text-primary">
+                View Description
+              </button>
+            </Popover>
+          )}
+        </div>
         <div className="flex items-center gap-x-14 w-full">
           <div className="flex items-center gap-x-2 flex-1">
             <svg

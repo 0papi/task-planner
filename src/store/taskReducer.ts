@@ -81,6 +81,7 @@ export const {
   updateSuccessState,
   updateErrorState,
   updateTask,
+  updateTaskDescription,
   deleteTask,
   setTaskPriority,
   setTaskComplete,

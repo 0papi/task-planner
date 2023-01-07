@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 
 import InfoIcon from "../icons & svs/InfoIcon";
 import { IModal } from "../../types";
-import { updateTask } from "../../store/taskReducer";
+import { updateTaskDescription } from "../../store/taskReducer";
 interface IEditModal extends IModal {
   id: string;
 }
@@ -27,7 +27,7 @@ export default function AddDescriptionModal({
       return;
     }
 
-    // description add dispatch
+    dispatch(updateTaskDescription({ id, description }));
 
     setToast({
       text: "Description added",

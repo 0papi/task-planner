@@ -55,7 +55,9 @@ const DashboardLayout = ({ children }: Props) => {
       <div className="z-20 tablets:hidden  pt-4 ">
         <div className="fixed top-2 h-[98.5vh] flex items-center text-center flex-col gap-y-8 w-20 bg-white shadow-sm">
           <div>
-            <Logo />
+            <Link href={"/"}>
+              <Logo />
+            </Link>
           </div>
 
           <div>

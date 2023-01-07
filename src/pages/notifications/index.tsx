@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { pageClasses } from "../../utils/classes";
 import { useEffect, useRef, useState } from "react";
 import { selectTaskList } from "../../store/taskReducer";
+import { Divider } from "@geist-ui/core";
 
 export default function Notifications() {
   const tasksList = useSelector(selectTaskList);
@@ -31,9 +32,8 @@ export default function Notifications() {
   return (
     <DashboardLayout>
       <div className={`${pageClasses}`}>
-        <h1 className="border-b border-b-gray-500 w-full">
-          Your notifications
-        </h1>
+        <h1 className=" w-full">Your notifications</h1>
+        <Divider />
         <div className="bg-white shadow-sm w-[400px] rounded-md py-4 px-4">
           {showTaskText}
         </div>

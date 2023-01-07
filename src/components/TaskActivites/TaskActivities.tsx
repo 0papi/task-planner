@@ -1,9 +1,10 @@
-import { Popover, useModal, useToasts } from "@geist-ui/core";
+import { Popover, useModal, useScale, useToasts } from "@geist-ui/core";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import Elipsis from "../icons & svs/ElipsisIcon";
 import { deleteTask, setTaskComplete } from "../../store/taskReducer";
 import AddDescriptionModal from "../Modals/AddDescriptionModal";
+import { useState } from "react";
 
 interface ITaskActs {
   id: string;
@@ -17,16 +18,26 @@ export default function TaskActivities({
   isCompleted,
 }: ITaskActs) {
   const dispatch = useDispatch();
-  const router = useRouter();
+  const [popVisible, setPopVisible] = useState(false);
   const { bindings, setVisible } = useModal();
   const { setToast } = useToasts();
+
+  const changeHandler = (next: any) => {
+    setPopVisible(next);
+  };
 
   const TaskActions = () => {
     const classes =
       "bg-transparent flex items-center gap-x-2 hover:bg-gray-200 w-full px-2 p-1 outline-none border-none focus:outline-none focus:border-none";
     return (
       <div className="flex items-start flex-col">
-        <button className={`${classes}`} onClick={() => setVisible(true)}>
+        <button
+          className={`${classes}`}
+          onClick={() => {
+            setPopVisible(false);
+            setVisible(true);
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -48,6 +59,7 @@ export default function TaskActivities({
         <button
           className={`text-red ${classes} text-left my-4`}
           onClick={() => {
+            setPopVisible(false);
             dispatch(deleteTask({ id }));
 
             setToast({
@@ -76,6 +88,7 @@ export default function TaskActivities({
         <button
           className={`${classes}`}
           onClick={() => {
+            setPopVisible(false);
             dispatch(setTaskComplete({ id }));
 
             setToast({
@@ -107,10 +120,15 @@ export default function TaskActivities({
   };
   return (
     <>
-      <Popover content={TaskActions}>
+      <Popover
+        content={TaskActions}
+        visible={popVisible}
+        onVisibleChange={changeHandler}
+      >
         <button
           className="bg-transparent border border-gray-300 rounded-lg p-1"
           onClick={onClick}
+          title="Further actions"
         >
           <Elipsis />
         </button>
