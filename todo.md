@@ -16,6 +16,7 @@
 - Read Task - done
 - Delete todos - done
 - Add descriptions to do - done
+- Use rich text editor for description?
 - Search & Filter todos
 - Mark as complete - done
 - Edited flag
