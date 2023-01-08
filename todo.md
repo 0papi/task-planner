@@ -19,7 +19,6 @@
 - Use rich text editor for description?
 - Search & Filter todos
 - Mark as complete - done
-- Edited flag
 - Set priority - done
 - implement notification - done
 - implement analytics / insights page where users can view the following info: - total tasks - total completed tasks - total uncompleted tasks = done
