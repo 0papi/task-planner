@@ -60,7 +60,7 @@ export default function TaskDisplay({
   const isDescriptionAvailable = Boolean(description);
 
   // description to be passed to popover
-  const showDescription = <p className="max-w-lg py-4 px-2">{description}</p>;
+  const showDescription = <p className="max-w-lg px-2">{description}</p>;
 
   return (
     <div className="bg-white shadow-sm p-4 flex items-baseline gap-x-4 my-4 rounded-[8px]">
@@ -95,6 +95,7 @@ export default function TaskDisplay({
               isCompleted={isCompleted}
               id={taskActivitiesID}
               onClick={() => setTaskActivitiesID(id)}
+              description={description}
             />
           </div>
         </div>

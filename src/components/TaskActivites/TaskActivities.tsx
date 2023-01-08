@@ -1,26 +1,35 @@
-import { Popover, useModal, useScale, useToasts } from "@geist-ui/core";
-import { useDispatch } from "react-redux";
-import { useRouter } from "next/router";
-import Elipsis from "../icons & svs/ElipsisIcon";
-import { deleteTask, setTaskComplete } from "../../store/taskReducer";
-import AddDescriptionModal from "../Modals/AddDescriptionModal";
+import { Popover, useModal, useToasts } from "@geist-ui/core";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import Elipsis from "../icons & svs/ElipsisIcon";
+import {
+  deleteTask,
+  selectTaskList,
+  setTaskComplete,
+} from "../../store/taskReducer";
+import AddDescriptionModal from "../Modals/AddDescriptionModal";
+import EditTaskModal from "../Modals/EditTaskModal";
+import EditDescription from "../Modals/EditDescriptionModal";
 
 interface ITaskActs {
   id: string;
   onClick: () => void;
   isCompleted: boolean;
+  description: string;
 }
 
 export default function TaskActivities({
   id,
   onClick,
   isCompleted,
+  description,
 }: ITaskActs) {
   const dispatch = useDispatch();
   const [popVisible, setPopVisible] = useState(false);
   const { bindings, setVisible } = useModal();
+  const { bindings: editBindings, setVisible: setEditBindings } = useModal();
   const { setToast } = useToasts();
+  const [descriptionEdit, setDescriptionEdit] = useState(description);
 
   const changeHandler = (next: any) => {
     setPopVisible(next);
@@ -31,30 +40,57 @@ export default function TaskActivities({
       "bg-transparent flex items-center gap-x-2 hover:bg-gray-200 w-full px-2 p-1 outline-none border-none focus:outline-none focus:border-none";
     return (
       <div className="flex items-start flex-col">
-        <button
-          className={`${classes}`}
-          onClick={() => {
-            setPopVisible(false);
-            setVisible(true);
-          }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
+        {description.trim.length !== 0 || Boolean(description) ? (
+          <button
+            className={`${classes}`}
+            onClick={() => {
+              setPopVisible(false);
+              setEditBindings(true);
+            }}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 4.5v15m7.5-7.5h-15"
-            />
-          </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+              />
+            </svg>
 
-          <span> Add Description</span>
-        </button>
+            <span> Edit Description</span>
+          </button>
+        ) : (
+          <button
+            className={`${classes}`}
+            onClick={() => {
+              setPopVisible(false);
+              setVisible(true);
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+              />
+            </svg>
+
+            <span>Add Description</span>
+          </button>
+        )}
 
         <button
           className={`text-red ${classes} text-left my-4`}
@@ -138,6 +174,13 @@ export default function TaskActivities({
         bindings={bindings}
         id={id}
         setVisible={setVisible}
+      />
+      <EditDescription
+        bindings={editBindings}
+        setVisible={setEditBindings}
+        id={id}
+        descriptionEdit={descriptionEdit}
+        setDescriptionEdit={setDescriptionEdit}
       />
     </>
   );
