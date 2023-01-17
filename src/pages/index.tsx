@@ -1,7 +1,7 @@
 import { useModal, Modal, useToasts } from "@geist-ui/core";
 import { useDispatch } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
-import { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { ModalHooksBindings } from "@geist-ui/core/esm/use-modal";
 import { Dispatch, SetStateAction } from "react";
 
@@ -15,12 +15,28 @@ import DashboardLayout from "../components/Layouts/DashboardLayout";
 
 export default function Home() {
   const { setVisible, bindings } = useModal();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
 
   return (
     <DashboardLayout>
       <div className="py-10 px-10 bg-backgroundMain">
         <div className="flex items-center justify-between">
-          <h2 className="font-bold">My Work</h2>
+          <div className="flex items-center gap-x-4">
+            <h2 className="font-bold">My Work</h2>
+            <div>
+              <input
+                type="text"
+                className="py-1 border border-gray-200 rounded-3xl indent-1 focus:outline focus:outline-1 focus:outline-primary"
+                placeholder="search task title"
+                value={searchTerm}
+                onChange={(e) => handleSearch(e)}
+              />
+            </div>
+          </div>
           <div className="flex items-center gap-x-2">
             <button
               className="bg-primary text-white py-2 px-6 rounded-xl"
@@ -34,7 +50,7 @@ export default function Home() {
         {/* main tasks body */}
         <section className="flex gap-x-14 mt-8">
           <main className="w-3/5">
-            <LeftContainer />
+            <LeftContainer searchTerm={searchTerm} />
           </main>
           <main className="w-2/5">
             <RightContainer />

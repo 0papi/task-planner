@@ -79,6 +79,8 @@ export default function TaskDisplay({
               taskPriority={taskPriority}
             />
 
+            {/* <DatePickerComponent /> */}
+
             <button
               title="Edit task"
               className="bg-transparent border border-gray-300 rounded-lg p-1"

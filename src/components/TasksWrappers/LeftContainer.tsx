@@ -1,22 +1,43 @@
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { selectTaskList } from "../../store/taskReducer";
 import EmtptyState from "../EmptyState/EmptyState";
 import TaskDisplay from "../TasksList/TaskDisplay";
 
-export default function LeftContainer() {
+interface IMainTaskPageProps {
+  searchTerm: string;
+}
+
+export default function LeftContainer({ searchTerm }: IMainTaskPageProps) {
   const taskList = useSelector(selectTaskList);
-  const isEmpty = taskList.length <= 0;
+  const filteredJobs = useMemo(
+    () =>
+      taskList.filter((task) =>
+        task.title
+          .trim()
+          .toLowerCase()
+          .includes(searchTerm.trim().toLowerCase())
+      ),
+    [searchTerm, taskList]
+  );
+  const isEmpty = filteredJobs.length <= 0;
 
   return (
     <div className="bg-backgroundMain">
       {isEmpty && (
-        <div className="flex items-center flex-col justify-center mx-auto">
-          <EmtptyState />
+        <div>
+          {searchTerm.length === 0 ? (
+            <div className="flex items-center flex-col justify-center mx-auto">
+              <EmtptyState />
+            </div>
+          ) : (
+            <h2>No search results for term: {searchTerm}</h2>
+          )}
         </div>
       )}
 
       <div>
-        {taskList.map((item) => (
+        {filteredJobs.map((item) => (
           <div key={item?.id}>
             <TaskDisplay
               title={item?.title}

@@ -14,6 +14,10 @@ interface IAppState {
   taskList: ITasks[];
 }
 
+interface ISearch {
+  searchTerm: string;
+}
+
 const initialState: IAppState = {
   taskList: [],
   error: null,

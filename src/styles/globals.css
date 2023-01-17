@@ -42,3 +42,7 @@ a {
   display: grid;
   grid-template-columns: 50px 1fr;
 }
+
+input[type="tel"] {
+  display: none;
+}
