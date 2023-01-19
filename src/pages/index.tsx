@@ -1,42 +1,8 @@
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "../../firebase.config";
 import { useRouter } from "next/router";
 import Logo from "../components/icons & svs/Logo";
 
 export default function Home() {
-  const provider = new GoogleAuthProvider();
   const router = useRouter();
-
-  const handleGoogleSignIn = () => {
-    return signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential?.accessToken;
-
-        // The signed-in user info.
-        const user = result.user;
-
-        router.push({
-          pathname: "/dashboard",
-          query: {
-            name: user.displayName,
-            photo: user.photoURL,
-          },
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
-  };
   return (
     <div className="bg-black min-h-screen">
       <div className="max-w-4xl mx-auto py-4">
@@ -44,7 +10,7 @@ export default function Home() {
           <Logo />
           <button
             className="text-white border-2 border-gray-500 px-2 py-1 rounded-[100px]"
-            onClick={() => handleGoogleSignIn()}
+            onClick={() => router.push("/auth")}
           >
             Get Started
           </button>
