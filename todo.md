@@ -22,3 +22,9 @@
 - Set priority - done
 - implement notification - done
 - implement analytics / insights page where users can view the following info: - total tasks - total completed tasks - total uncompleted tasks = done
+
+# More Features
+
+- Include authentication
+- Add a landing page
+- Use firebase to store user tasks

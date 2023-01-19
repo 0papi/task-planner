@@ -10,7 +10,7 @@ interface IMainTaskPageProps {
 
 export default function LeftContainer({ searchTerm }: IMainTaskPageProps) {
   const taskList = useSelector(selectTaskList);
-  const filteredJobs = useMemo(
+  const filteredTasks = useMemo(
     () =>
       taskList.filter((task) =>
         task.title
@@ -20,7 +20,7 @@ export default function LeftContainer({ searchTerm }: IMainTaskPageProps) {
       ),
     [searchTerm, taskList]
   );
-  const isEmpty = filteredJobs.length <= 0;
+  const isEmpty = filteredTasks.length <= 0;
 
   return (
     <div className="bg-backgroundMain">
@@ -37,7 +37,7 @@ export default function LeftContainer({ searchTerm }: IMainTaskPageProps) {
       )}
 
       <div>
-        {filteredJobs.map((item) => (
+        {filteredTasks.map((item) => (
           <div key={item?.id}>
             <TaskDisplay
               title={item?.title}

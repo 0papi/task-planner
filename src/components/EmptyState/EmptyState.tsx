@@ -1,5 +1,5 @@
 import { useModal } from "@geist-ui/core";
-import { CreateNewModal } from "../../pages";
+import { CreateNewModal } from "../../pages/dashboard";
 
 export default function EmtptyState() {
   const { setVisible, bindings } = useModal();

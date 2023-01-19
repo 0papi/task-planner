@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
@@ -11,6 +12,11 @@ interface Props {
 
 const DashboardLayout = ({ children }: Props) => {
   const router = useRouter();
+
+  console.log("DATA FROM ROUTER", router.query);
+  const userPhoto = router.query?.photo;
+  const userName = router.query?.name;
+
   const linkClasses = " block text-base font-bold";
 
   const tasksList = useSelector(selectTaskList);
@@ -55,13 +61,16 @@ const DashboardLayout = ({ children }: Props) => {
       <div className="z-20 tablets:hidden  pt-4 ">
         <div className="fixed top-2 h-[98.5vh] flex items-center text-center flex-col gap-y-8 w-20 bg-white shadow-sm">
           <div>
-            <Link href={"/"}>
+            <Link href={"/dashboard"}>
               <Logo />
             </Link>
           </div>
 
           <div>
-            <Link href="/" className={`${linkClasses} ${getLinkClass("/")}`}>
+            <Link
+              href="/dashboard"
+              className={`${linkClasses} ${getLinkClass("/")}`}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill={getLinkFill("/")}
@@ -121,6 +130,16 @@ const DashboardLayout = ({ children }: Props) => {
                 className={`h-[8px] w-[8px] bg-red rounded-[50%] absolute top-0 right-0 ${displayNotificationAlert}`}
               ></div>
             </Link>
+          </div>
+
+          <div className="mt-auto pb-4">
+            <Image
+              src={userPhoto as string}
+              alt="logged in user email"
+              width={30}
+              height={30}
+              className="rounded-[50%]"
+            />
           </div>
         </div>
       </div>
