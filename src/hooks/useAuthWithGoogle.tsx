@@ -16,14 +16,11 @@ export default function useAuthWithGoogle() {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential?.accessToken;
 
-        console.log("AUTHED TOKEN", token);
-
         const user = result.user;
 
         if (user) {
           dispatch(
             setCurrentUser({
-              accessToken: token!,
               displayName: user.displayName!,
               email: user.email!,
               photoUrl: user.photoURL!,

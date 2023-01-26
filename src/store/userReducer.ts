@@ -7,7 +7,6 @@ interface IUserObject {
   email: string;
   uid: string;
   photoUrl: string;
-  accessToken: string;
 }
 
 interface CurrentUserState {
