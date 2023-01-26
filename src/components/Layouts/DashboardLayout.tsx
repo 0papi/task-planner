@@ -4,26 +4,25 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectTaskList } from "../../store/taskReducer";
+import { getCurrentUser } from "../../store/userReducer";
 
 import Logo from "../icons & svs/Logo";
+import LogoutUser from "../Logout/Logout";
 interface Props {
   children: React.ReactNode;
 }
 
 const DashboardLayout = ({ children }: Props) => {
   const router = useRouter();
-
-  console.log("DATA FROM ROUTER", router.query);
-  const userPhoto = router.query?.photo;
-  const userName = router.query?.name;
-
-  const linkClasses = " block text-base font-bold";
-
   const tasksList = useSelector(selectTaskList);
-  const [notificationText, setNotificationText] = useState("");
+  const currentUser = useSelector(getCurrentUser);
   const prevTasksLength = useRef(tasksList.length);
 
   const [isNewActivity, setIsNewActitivy] = useState(false);
+
+  const userPhoto = currentUser?.photoUrl;
+
+  const linkClasses = " block text-base font-bold";
 
   useEffect(() => {
     setIsNewActitivy(false);
@@ -138,8 +137,10 @@ const DashboardLayout = ({ children }: Props) => {
               alt="logged in user email"
               width={30}
               height={30}
-              className="rounded-[50%]"
+              className="rounded-[50%] mb-2"
             />
+
+            {currentUser && <LogoutUser />}
           </div>
         </div>
       </div>

@@ -1,10 +1,13 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 import { auth } from "../../firebase.config";
+import { setCurrentUser } from "../store/userReducer";
 
 export default function useAuthWithGoogle() {
   const provider = new GoogleAuthProvider();
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const signIn = () =>
     signInWithPopup(auth, provider)
@@ -15,20 +18,22 @@ export default function useAuthWithGoogle() {
 
         console.log("AUTHED TOKEN", token);
 
-        // The signed-in user info.
         const user = result.user;
-        console.log("AUTHED USER", user);
-        // TODO-
-        // SET USER TO THE CURRENT USER OBJECT THAT IS TO BE STORED IN REDUX
 
-        //   setUser(user);
+        if (user) {
+          dispatch(
+            setCurrentUser({
+              accessToken: token!,
+              displayName: user.displayName!,
+              email: user.email!,
+              photoUrl: user.photoURL!,
+              uid: user.uid,
+            })
+          );
+        }
 
         router.push({
           pathname: "/dashboard",
-          query: {
-            name: user.displayName,
-            photo: user.photoURL,
-          },
         });
       })
       .catch((error) => {
