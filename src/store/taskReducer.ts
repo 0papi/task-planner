@@ -91,8 +91,8 @@ export const {
   setTaskComplete,
 } = taskSlice.actions;
 
-export const selectTaskList = (state: RootState) => state.taskList;
-export const selectSuccessState = (state: RootState) => state.success;
-export const selectErrorState = (state: RootState) => state.error;
+export const selectTaskList = (state: RootState) => state.tasks.taskList;
+export const selectSuccessState = (state: RootState) => state.tasks.success;
+export const selectErrorState = (state: RootState) => state.tasks.error;
 
 export default taskSlice.reducer;

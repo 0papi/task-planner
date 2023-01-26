@@ -42,7 +42,7 @@ export default function useEmailAuth(email: string) {
   return {
     signInWithEmail,
     loading,
-    setIsError,
-    setErrorMessage,
+    isError,
+    errorMessage,
   };
 }

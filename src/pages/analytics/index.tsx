@@ -1,6 +1,6 @@
 import InsightCard from "../../components/InsightCard/InsightCard";
-import { selectTaskList } from "../../store/taskReducer";
 import { useSelector } from "react-redux";
+import { selectTaskList } from "../../store/taskReducer";
 import DashboardLayout from "../../components/Layouts/DashboardLayout";
 import { pageClasses } from "../../utils/classes";
 

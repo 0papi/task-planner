@@ -13,8 +13,11 @@ export default function useAuthWithGoogle() {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential?.accessToken;
 
+        console.log("AUTHED TOKEN", token);
+
         // The signed-in user info.
         const user = result.user;
+        console.log("AUTHED USER", user);
         // TODO-
         // SET USER TO THE CURRENT USER OBJECT THAT IS TO BE STORED IN REDUX
 

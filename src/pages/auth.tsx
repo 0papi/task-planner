@@ -7,7 +7,7 @@ export default function UserAuth() {
   const { signIn } = useAuthWithGoogle();
   const [showEmail, setShowEmail] = useState(false);
   const [email, setEmail] = useState<string>("");
-  const { signInWithEmail, loading, setErrorMessage, setIsError } =
+  const { signInWithEmail, loading, errorMessage, isError } =
     useEmailAuth(email);
 
   /**
