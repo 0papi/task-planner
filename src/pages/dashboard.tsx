@@ -27,10 +27,7 @@ export default function DashboardHome() {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    const userIdData = {
-      userId: currentUser!.uid,
-    };
-    dispatch(fetchTasksFromFirebase(userIdData));
+    dispatch(fetchTasksFromFirebase({ userId: currentUser?.uid! }));
   }, [dispatch]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {

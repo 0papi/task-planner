@@ -2,7 +2,6 @@ import { ITasksFB } from "./../../types/index";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { collection, where, query, getDocs } from "firebase/firestore";
 import { db } from "../../../firebase.config";
-import { ITasks } from "../../types";
 
 type IFetch = {
   userId: string;
@@ -15,10 +14,6 @@ export const fetchTasksFromFirebase = createAsyncThunk(
     const querySnapshot = await getDocs(q);
     const tasks: ITasksFB[] = [];
     querySnapshot.forEach((doc) => {
-      // tasks.push({ ...doc.data(), id: doc.id });
-
-      console.log(doc.id, " => ", doc.data());
-
       tasks.push({
         content: doc.data().content,
         createdAt: doc.data().createdAt,
@@ -33,7 +28,6 @@ export const fetchTasksFromFirebase = createAsyncThunk(
       });
     });
 
-    console.log(tasks);
     return tasks;
   }
 );
