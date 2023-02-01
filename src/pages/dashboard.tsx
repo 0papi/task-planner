@@ -1,25 +1,37 @@
 import { useModal, Modal, useToasts } from "@geist-ui/core";
 import { useDispatch } from "react-redux";
-import { nanoid } from "@reduxjs/toolkit";
-import React, { useEffect, useMemo, useState } from "react";
+import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
+
+import React, { useEffect, useCallback, useState } from "react";
 import { ModalHooksBindings } from "@geist-ui/core/esm/use-modal";
 import { Dispatch, SetStateAction } from "react";
 
 import LeftContainer from "../components/TasksWrappers/LeftContainer";
 import RightContainer from "../components/TasksWrappers/RightContainer";
 import InfoIcon from "../components/icons & svs/InfoIcon";
-import { createTasks } from "../store/taskReducer";
-import { options } from "../utils/date";
+import { fetchTasksFromFirebase } from "../store/thunks/fetchTasks";
 import { selectTaskList } from "../store/taskReducer";
+// import { createTaskToFirebase } from "../store/taskReducer";
 
 import DashboardLayout from "../components/Layouts/DashboardLayout";
 import { useSelector } from "react-redux";
+import { getCurrentUser } from "../store/userReducer";
+import { createTaskToFirebase } from "../store/thunks/createTasks";
 
 export default function DashboardHome() {
   const { setVisible, bindings } = useModal();
   const tasksList = useSelector(selectTaskList);
+  const dispatch = useDispatch<ThunkDispatch<any, any, AnyAction>>();
+  const currentUser = useSelector(getCurrentUser);
 
   const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const userIdData = {
+      userId: currentUser!.uid,
+    };
+    dispatch(fetchTasksFromFirebase(userIdData));
+  }, [dispatch]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -84,7 +96,8 @@ export const CreateNewModal = ({ bindings, setVisible }: IModal) => {
   const [content, setContent] = useState("");
   const [titleError, setTitleError] = useState(false);
   const [contentError, setContentError] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<ThunkDispatch<any, any, AnyAction>>();
+  const currentUser = useSelector(getCurrentUser);
 
   /**
    * @description function that handles dispatching action to create new task
@@ -104,20 +117,10 @@ export const CreateNewModal = ({ bindings, setVisible }: IModal) => {
       return;
     }
 
-    // required fields provided go ahead and dispatch action to store
-    dispatch(
-      createTasks({
-        id: nanoid(),
-        title,
-        content,
-        //@ts-ignore
-        createdAt: new Date().toLocaleString("en-US", options),
-        priority: "unset",
-        isCompleted: false,
-        isEdited: false,
-        lastEdited: "unset",
-        description: "",
-      })
+    const taskData = { content, title, userId: currentUser!.uid };
+
+    dispatch(createTaskToFirebase(taskData)).then(() =>
+      dispatch(fetchTasksFromFirebase({ userId: currentUser?.uid! }))
     );
 
     setToast({

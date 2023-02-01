@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
-// @todo -- CREATE USER OBJECT USER INTERFACE
+// @todo -- CREATE USER OBJECT INTERFACE
 interface IUserObject {
   displayName: string;
   email: string;

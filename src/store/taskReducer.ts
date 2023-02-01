@@ -1,21 +1,19 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { createTaskToFirebase } from "./thunks/createTasks";
 import { RootState } from "./store";
+import { fetchTasksFromFirebase } from "./thunks/fetchTasks";
 import {
   IDeleteTask,
   IDescription,
   ITaskPriority,
-  ITasks,
+  ITasksFB,
   IUpdateTask,
 } from "../types";
 
 interface IAppState {
   error: string | null;
   success: boolean;
-  taskList: ITasks[];
-}
-
-interface ISearch {
-  searchTerm: string;
+  taskList: ITasksFB[];
 }
 
 const initialState: IAppState = {
@@ -28,9 +26,6 @@ const taskSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    createTasks: (state, action: PayloadAction<ITasks>) => {
-      state.taskList.push(action.payload);
-    },
     updateSuccessState: (state, action) => {
       state.success = true;
     },
@@ -78,10 +73,17 @@ const taskSlice = createSlice({
       }
     },
   },
+  extraReducers(builder) {
+    builder.addCase(createTaskToFirebase.fulfilled, (state, action) => {
+      state.success = true;
+    });
+    builder.addCase(fetchTasksFromFirebase.fulfilled, (state, action) => {
+      state.taskList = action.payload;
+    });
+  },
 });
 
 export const {
-  createTasks,
   updateSuccessState,
   updateErrorState,
   updateTask,

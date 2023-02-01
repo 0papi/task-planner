@@ -12,6 +12,18 @@ export interface ITasks {
   lastEdited: string | "unset";
   priority: "high" | "medium" | "low" | "unset";
 }
+export interface ITasksFB {
+  userId: string;
+  id: string;
+  title: string;
+  content: string;
+  description: string;
+  isCompleted: boolean;
+  isEdited: boolean;
+  createdAt: string;
+  lastEdited: string | "unset";
+  priority: "high" | "medium" | "low" | "unset";
+}
 
 export interface IModal {
   bindings: ModalHooksBindings;
